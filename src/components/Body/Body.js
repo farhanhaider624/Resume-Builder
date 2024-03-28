@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Body.module.css";
 import ReactToPrint from "react-to-print";
 import { ArrowDown } from "react-feather";
@@ -11,7 +11,7 @@ function Body() {
     workExp: "Work Experience",
     project: "Project",
     education: "Education",
-    achievements: "Achievements",
+    achievement: "Achievements",
     summary: "Summary",
     other: "Other",
   };
@@ -41,7 +41,7 @@ function Body() {
     [sections.achievement]: {
       id: sections.achievement,
       sectionTitle: sections.achievement,
-      points: [],
+      points: [{ title: "hello" }],
     },
     [sections.summary]: {
       id: sections.summary,
@@ -54,6 +54,11 @@ function Body() {
       detail: "",
     },
   });
+
+  useEffect(() => {
+    console.log(resumeInformation)
+  }, [resumeInformation])
+  
 
   return (
     <div className={styles.container}>
@@ -83,7 +88,11 @@ function Body() {
         />
       </div>
       <div className={styles.main}>
-        <Editor sections={sections} information={resumeInformation}/>
+        <Editor 
+          sections={sections} 
+          information={resumeInformation} 
+          setInformation={setResumeInformation}
+          />
       </div>
     </div>
   );
